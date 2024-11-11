@@ -1,8 +1,21 @@
 import requests
 import json
 
+import argparse
+
+# Create the argument parser
+parser = argparse.ArgumentParser(description="Enter phone number")
+parser.add_argument('phone_number', type=str, help='The phone number')
+
+# Parse the arguments
+args = parser.parse_args()
+
+# Use the phone number
+phn = args.phone_number
+print(f"Entered phone number: {phn}")
+
 # Get the phone number from the request
-phn = input("Enter phone number: ")
+
 
 # Define the URL and headers
 url = "https://cineplex-ticket-api.cineplexbd.com/api/v1/otp-resend"
