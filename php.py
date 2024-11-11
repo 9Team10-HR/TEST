@@ -1,9 +1,28 @@
 import requests
 import json
+import os
+import requests
+import logging
+import sys
 
-# Use the phone number
-phn = 
+# Setup basic logging
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
 
+# Get the phone number from environment variable (for Render deployment)
+phn = os.getenv('PHONE_NUMBER')
+if not phn:
+    logging.error("Phone number is required! Please set the PHONE_NUMBER environment variable.")
+    sys.exit(1)
+# Function to send requests and handle response
+def send_request(url, data, headers):
+    try:
+        response = requests.post(url, json=data, headers=headers, verify=False)
+        if response.status_code == 200:
+            logging.info(f"Response from {url}: {response.text}")
+        else:
+            logging.error(f"Error occurred with status code {response.status_code}: {response.text}")
+    except Exception as e:
+        logging.error(f"Error while making request to {url}: {e}")
 
 # Get the phone number from the request
 
